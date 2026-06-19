@@ -14,6 +14,10 @@ CONFIG_PACKAGE_collectd-mod-interface=y
 CONFIG_PACKAGE_collectd-mod-memory=y
 CONFIG_PACKAGE_collectd-mod-temperature=y
 
+#温度监控依赖
+CONFIG_PACKAGE_kmod-hwmon=y
+CONFIG_PACKAGE_kmod-hwmon-tmp102=y
+
 #删除插件
 CONFIG_PACKAGE_luci-app-wol=n
 
@@ -29,6 +33,7 @@ CONFIG_PACKAGE_kmod-dsa=y
 CONFIG_PACKAGE_kmod-tun=y
 CONFIG_PACKAGE_kmod-wireguard=y
 CONFIG_PACKAGE_kmod-inet-diag=y
+CONFIG_PACKAGE_kmod-bridge=y
 
 # HomeProxy + MESH 必需 nftables
 CONFIG_PACKAGE_kmod-nft-core=y
@@ -38,6 +43,14 @@ CONFIG_PACKAGE_kmod-nft-nat=y
 CONFIG_PACKAGE_kmod-nft-netdev=y
 CONFIG_PACKAGE_kmod-nft-socket=y
 CONFIG_PACKAGE_kmod-nft-tproxy=y
+
+# iptables兼容层（HomeProxy必需）
+CONFIG_PACKAGE_iptables-nft=y
+CONFIG_PACKAGE_ip6tables-nft=y
+
+# UPnP端口转发内核依赖
+CONFIG_PACKAGE_kmod-ipt-nathelper=y
+CONFIG_PACKAGE_kmod-ipt-nathelper-extra=y
 
 # 关闭无用内核模块（降低内存）
 CONFIG_PACKAGE_kmod-mtd-rw=n
@@ -53,6 +66,8 @@ CONFIG_PACKAGE_cpufreq=y
 CONFIG_PACKAGE_htop=y
 CONFIG_PACKAGE_ip-full=y
 CONFIG_PACKAGE_openssh-sftp-server=y
+CONFIG_PACKAGE_tcpdump=y
+CONFIG_PACKAGE_nslookup=y
 
 # LuCI 最小依赖
 CONFIG_PACKAGE_luci-base=y
@@ -66,6 +81,10 @@ CONFIG_PACKAGE_fdisk=n
 CONFIG_PACKAGE_lsblk=n
 CONFIG_PACKAGE_sfdisk=n
 CONFIG_PACKAGE_sgdisk=n
-CONFIG_PACKAGE_luci-compat=n
-CONFIG_PACKAGE_luci-lib-ipkg=n
-CONFIG_PACKAGE_luci-proto-relay=n
+
+# NSS硬件加速（适配你前面的NSS补丁，AX3600必开）
+CONFIG_ATH11K_NSS_SUPPORT=y
+CONFIG_ATH11K_NSS_MESH_SUPPORT=y
+CONFIG_ATH11K_MEM_PROFILE_512M=y
+CONFIG_PACKAGE_kmod-qca-nss-drv=y
+CONFIG_PACKAGE_kmod-qca-nss-drv-bridge-mgr=y
